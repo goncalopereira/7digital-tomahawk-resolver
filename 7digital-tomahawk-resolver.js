@@ -29,7 +29,7 @@ this.executeSearchQuery(qid, sdUrl);
         return null;
     },
 
-	parseTrack : function(track, scoreValue)
+	parseTrack : function(track)
     {
 	var id = track.attributes[0].value;
 
@@ -40,13 +40,12 @@ this.executeSearchQuery(qid, sdUrl);
            albumpos: track.childNodes[3].textContent, //should work but not on my current version 0.4.0
             source: this.settings.name,
          //   size: this.getXmlAttribute("size", song_attributes), //get from header..
-            duration: track.childNodes[4].textContent,
+            duration: 30, //track.childNodes[4].textContent, //thats actual track duration not preview..
            // bitrate: this.getXmlAttribute("bitRate", song_attributes), //not available, aproximate duration with size????
             url: "http://api.7digital.com/1.2/track/preview?trackid=" + id + "&oauth_consumer_key=musichackday",
             extension: "mp3",//get from header..
            // year: this.getXmlAttribute("year", song_attributes)
 
-		score: scoreValue,
 		mimeType: "audio/mpeg", //get from header..
         };
     },
@@ -61,12 +60,9 @@ this.executeSearchQuery(qid, sdUrl);
 
 		var search_results = xmlDoc.childNodes[0].childNodes[0].childNodes;
 
-
-Tomahawk.log(search_results.length);
-
 	   for (var count = 3; count < search_results.length; count++)
             {
-                results.push(that.parseTrack(search_results[count].childNodes[1], 1));
+                results.push(that.parseTrack(search_results[count].childNodes[1]));
             }
 
             var return_songs = {
