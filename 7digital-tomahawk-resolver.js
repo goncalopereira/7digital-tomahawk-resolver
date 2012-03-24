@@ -37,7 +37,7 @@ this.executeSearchQuery(qid, sdUrl);
             artist: track.childNodes[2].childNodes[0].textContent,
             album: track.childNodes[8].childNodes[0].textContent,
             track: track.childNodes[0].textContent,
-           albumpos: track.childNodes[3].textContent,
+           albumpos: track.childNodes[3].textContent, //should work but not on my current version 0.4.0
             source: this.settings.name,
          //   size: this.getXmlAttribute("size", song_attributes), //get from header..
             duration: track.childNodes[4].textContent,
@@ -47,7 +47,7 @@ this.executeSearchQuery(qid, sdUrl);
            // year: this.getXmlAttribute("year", song_attributes)
 
 		score: scoreValue,
-		mimeType: "audio/mpeg" //get from header..
+		mimeType: "audio/mpeg", //get from header..
         };
     },
     executeSearchQuery : function(qid, search_url)
